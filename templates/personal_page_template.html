@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ name }}的个人主页</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+        body {
+            font-family: 'PingFang SC', '苹方', sans-serif;
+        }
+        {{ custom_css }}
+    </style>
+</head>
+<body class="{{ theme.bg }}">
+    <!-- 导航栏 -->
+    <nav class="{{ theme.card }} shadow-lg fixed w-full z-10">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="text-xl font-bold {{ theme.text }}">{{ name }}</div>
+                <div class="flex space-x-4">
+                    <a href="#about" class="{{ theme.text }} hover:text-gray-900">关于我</a>
+                    <a href="#skills" class="{{ theme.text }} hover:text-gray-900">技能</a>
+                    <a href="#projects" class="{{ theme.text }} hover:text-gray-900">项目</a>
+                    <a href="#contact" class="{{ theme.text }} hover:text-gray-900">联系我</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 头部区域 -->
+    <header class="pt-24 pb-12 bg-gradient-to-r {{ theme.primary }}">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <div class="flex justify-center mb-8">
+                <img src="{{ avatar_url }}" alt="{{ name }}" class="w-32 h-32 rounded-full border-4 border-white shadow-lg">
+            </div>
+            <h1 class="text-4xl font-bold text-white mb-4">{{ name }}</h1>
+            <p class="text-xl text-white opacity-90">{{ title }}</p>
+        </div>
+    </header>
+
+    <!-- 关于我 -->
+    <section id="about" class="py-16 {{ theme.card }}">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold {{ theme.text }} mb-8 text-center">关于我</h2>
+            <div class="prose max-w-3xl mx-auto">
+                {{ about }}
+            </div>
+        </div>
+    </section>
+
+    <!-- 技能 -->
+    <section id="skills" class="py-16 {{ theme.bg }}">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold {{ theme.text }} mb-8 text-center">技能专长</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {% for skill in skills %}
+                <div class="{{ theme.card }} p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <div class="text-4xl text-blue-500 mb-4">
+                        <i class="{{ skill.icon }}"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold {{ theme.text }}">{{ skill.name }}</h3>
+                    <p class="text-gray-600">{{ skill.description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- 项目 -->
+    <section id="projects" class="py-16 {{ theme.card }}">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold {{ theme.text }} mb-8 text-center">项目展示</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% for project in projects %}
+                <div class="{{ theme.card }} rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                    <div class="relative">
+                        <img src="{{ project.image }}" alt="{{ project.name }}" class="w-full h-48 object-cover">
+                        <div class="absolute top-4 right-4 text-2xl text-white bg-black bg-opacity-50 p-2 rounded-full">
+                            <i class="{{ project.icon }}"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold {{ theme.text }} mb-2">{{ project.name }}</h3>
+                        <p class="text-gray-600 mb-4">{{ project.description }}</p>
+                        <div class="flex space-x-4">
+                            {% if project.github %}
+                            <a href="{{ project.github }}" class="text-blue-500 hover:text-blue-700" target="_blank">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            {% endif %}
+                            {% if project.demo %}
+                            <a href="{{ project.demo }}" class="text-blue-500 hover:text-blue-700" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> 演示
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section id="contact" class="py-16 {{ theme.bg }}">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold {{ theme.text }} mb-8 text-center">联系我</h2>
+            <div class="flex justify-center space-x-8">
+                {{ contact_html }}
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p>&copy; {{ year }} {{ name }}. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

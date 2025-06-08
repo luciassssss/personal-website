@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ name }}的简历</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            margin: 40px;
+            color: #333;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section-title {
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        .contact-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .experience-item {
+            margin-bottom: 15px;
+        }
+        .date {
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{ name }}</h1>
+        <div class="contact-info">
+            <p>电话：{{ phone }} | 邮箱：{{ email }}</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">教育背景</h2>
+        {{ education }}
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">工作经验</h2>
+        {{ experience }}
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">技能</h2>
+        {{ skills }}
+    </div>
+</body>
+</html>
